@@ -4,10 +4,9 @@ type TestimonialProps = {
   content: string;
   author: string;
   role: string;
-  imageUrl?: string;
 };
 
-const TestimonialCard = ({ content, author, role, imageUrl }: TestimonialProps) => {
+const TestimonialCard = ({ content, author, role }: TestimonialProps) => {
   return (
     <div className="bg-white rounded-lg shadow-lg p-6 relative">
       <svg className="h-12 w-12 text-gray-200 absolute top-6 left-6" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
