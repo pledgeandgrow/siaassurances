@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 const About = () => {
   return (
@@ -35,7 +34,7 @@ const About = () => {
                 <div className="ml-4">
                   <h3 className="text-lg font-medium text-gray-900">Expertise</h3>
                   <p className="mt-2 text-base text-gray-500">
-                    Notre équipe possède une connaissance approfondie du marché de l'assurance et de ses évolutions.
+                    Notre équipe possède une connaissance approfondie du marché de l&apos;assurance et de ses évolutions.
                   </p>
                 </div>
               </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 type TestimonialProps = {
   content: string;
@@ -17,11 +16,7 @@ const TestimonialCard = ({ content, author, role, imageUrl }: TestimonialProps) 
       <p className="text-gray-500 mt-8 mb-4">{content}</p>
       <div className="flex items-center">
         <div className="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-          {imageUrl ? (
-            <Image src={imageUrl} alt={author} width={40} height={40} className="rounded-full" />
-          ) : (
-            <span className="text-blue-600 font-bold text-lg">{author.charAt(0)}</span>
-          )}
+          <span className="text-blue-600 font-bold text-lg">{author.charAt(0)}</span>
         </div>
         <div className="ml-3">
           <p className="text-sm font-medium text-gray-900">{author}</p>
@@ -46,17 +41,17 @@ const Testimonials = () => {
         </div>
         <div className="mt-12 grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <TestimonialCard
-            content="SIA Assurances a su m'accompagner dans la recherche de la meilleure assurance pour ma nouvelle entreprise. Leur expertise et leur réactivité ont été déterminantes."
+            content="SIA Assurances a su m&apos;accompagner dans la recherche de la meilleure assurance pour ma nouvelle entreprise. Leur expertise et leur réactivité ont été déterminantes."
             author="Marie Dupont"
             role="Dirigeante, MD Consulting"
           />
           <TestimonialCard
-            content="Après un sinistre important, l'équipe de SIA a géré mon dossier avec professionnalisme et efficacité. Je recommande vivement leurs services."
+            content="Après un sinistre important, l&apos;équipe de SIA a géré mon dossier avec professionnalisme et efficacité. Je recommande vivement leurs services."
             author="Thomas Laurent"
             role="Propriétaire immobilier"
           />
           <TestimonialCard
-            content="Grâce à l'audit de mes contrats réalisé par SIA Assurances, j'ai pu optimiser mes couvertures tout en réduisant mes cotisations. Un service vraiment précieux."
+            content="Grâce à l&apos;audit de mes contrats réalisé par SIA Assurances, j&apos;ai pu optimiser mes couvertures tout en réduisant mes cotisations. Un service vraiment précieux."
             author="Sophie Martin"
             role="Directrice financière, SME Solutions"
           />
