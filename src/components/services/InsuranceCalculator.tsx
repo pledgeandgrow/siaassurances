@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 // Types pour les options de la calculatrice
 type InsuranceType = 'decennale' | 'dommages-ouvrage' | 'rc-promoteur';
@@ -102,7 +102,7 @@ const InsuranceCalculator = () => {
     if (showResult) {
       setShowResult(false);
     }
-  }, [insuranceType, companySize, activityType, experience, revenue]);
+  }, [insuranceType, companySize, activityType, experience, revenue, showResult]);
 
   return (
     <motion.section 
@@ -122,7 +122,7 @@ const InsuranceCalculator = () => {
           >
             Estimation rapide
           </motion.span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900">Calculatrice de prime d'assurance</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900">Calculatrice de prime d&apos;assurance</h2>
           <motion.div 
             className="w-20 h-1 bg-blue-600 mx-auto mb-6 rounded-full"
             initial={{ width: 0 }}
@@ -130,7 +130,7 @@ const InsuranceCalculator = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
           />
           <p className="text-gray-600">
-            Obtenez une estimation rapide de votre prime d'assurance en fonction de votre activité et de votre profil.
+            Obtenez une estimation rapide de votre prime d&apos;assurance en fonction de votre activité et de votre profil.
           </p>
         </div>
 
@@ -144,7 +144,7 @@ const InsuranceCalculator = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Type d'assurance */}
             <div>
-              <label className="block text-sm font-medium text-gray-800 mb-2">Type d'assurance</label>
+              <label className="block text-sm font-medium text-gray-800 mb-2">Type d&apos;assurance</label>
               <select
                 value={insuranceType}
                 onChange={(e) => setInsuranceType(e.target.value as InsuranceType)}
@@ -158,7 +158,7 @@ const InsuranceCalculator = () => {
 
             {/* Taille de l'entreprise */}
             <div>
-              <label className="block text-sm font-medium text-gray-800 mb-2">Taille de l'entreprise</label>
+              <label className="block text-sm font-medium text-gray-800 mb-2">Taille de l&apos;entreprise</label>
               <select
                 value={companySize}
                 onChange={(e) => setCompanySize(e.target.value as CompanySize)}
@@ -173,7 +173,7 @@ const InsuranceCalculator = () => {
 
             {/* Type d'activité */}
             <div>
-              <label className="block text-sm font-medium text-gray-800 mb-2">Type d'activité</label>
+              <label className="block text-sm font-medium text-gray-800 mb-2">Type d&apos;activité</label>
               <select
                 value={activityType}
                 onChange={(e) => setActivityType(e.target.value as ActivityType)}
@@ -181,7 +181,7 @@ const InsuranceCalculator = () => {
               >
                 <option value="gros-oeuvre">Gros œuvre (maçonnerie, charpente...)</option>
                 <option value="second-oeuvre">Second œuvre (peinture, carrelage...)</option>
-                <option value="corps-etat-technique">Corps d'état technique (électricité, plomberie...)</option>
+                <option value="corps-etat-technique">Corps d&apos;état technique (électricité, plomberie...)</option>
               </select>
             </div>
 
@@ -202,7 +202,7 @@ const InsuranceCalculator = () => {
             {/* Chiffre d'affaires */}
             <div className="md:col-span-2">
               <label className="block text-sm font-medium text-gray-800 mb-2">
-                Chiffre d'affaires annuel (€)
+                Chiffre d&apos;affaires annuel (€)
               </label>
               <div className="relative mt-1 rounded-md shadow-sm">
                 <input
@@ -298,7 +298,7 @@ const AnimatedResult: React.FC<{ show: boolean; premium: number | null }> = ({ s
         </motion.div>
         <p className="mt-4 text-sm text-gray-600">
           Cette estimation est basée sur les informations que vous avez fournies.
-          Pour une offre sur mesure, n'hésitez pas à nous contacter.
+          Pour une offre sur mesure, n&apos;hésitez pas à nous contacter.
         </p>
         <div className="mt-4">
           <a

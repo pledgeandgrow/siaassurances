@@ -20,7 +20,7 @@ const DevisStepFour: React.FC<DevisStepFourProps> = ({ formData, errors, handleC
         </div>
         <div>
           <h3 className="text-xl font-bold text-blue-900">Finalisation de votre demande</h3>
-          <p className="text-blue-800 text-sm">Dernière étape avant l'envoi de votre demande de devis</p>
+          <p className="text-blue-800 text-sm">Dernière étape avant l&apos;envoi de votre demande de devis</p>
         </div>
       </div>
       

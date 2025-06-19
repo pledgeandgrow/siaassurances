@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion, easeOut } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { buildingIcon, personIcon, shieldIcon, documentIcon, chatIcon, boltIcon } from './icons';
 
 // Types pour les services
@@ -149,32 +149,16 @@ const sectionVariants = {
   },
 };
 
-const headingVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
-      delay: 0.1,
-    },
-  },
-};
+// Animation variants - commented out as they're currently unused
+// const headingVariants = {
+//   hidden: { opacity: 0, y: -20 },
+//   visible: { opacity: 1, y: 0 }
+// };
 
-const underlineVariants = {
-  hidden: { width: 0, opacity: 0 },
-  visible: {
-    width: "70px",
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: easeOut, // Utilisation de l'easing fonction importée de framer-motion
-      delay: 0.5,
-    },
-  },
-};
+// const underlineVariants = {
+//   hidden: { width: 0 },
+//   visible: { width: 80 }
+// };
 
 // Définition des catégories de services
 type Category = {
@@ -285,9 +269,9 @@ const ServicesOverview = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            Nos services d'assurance
+            Nos services d&apos;assurance
           </motion.span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900">Solutions d'assurance professionnelles</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900">Solutions d&apos;assurance professionnelles</h2>
           <motion.div 
             className="w-20 h-1 bg-blue-600 mx-auto mb-6 rounded-full"
             initial={{ width: 0 }}
@@ -301,7 +285,7 @@ const ServicesOverview = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            Nous proposons des solutions d'assurance adaptées aux professionnels du bâtiment et aux chefs d'entreprise, 
+            Nous proposons des solutions d&apos;assurance adaptées aux professionnels du bâtiment et aux chefs d&apos;entreprise, 
             avec un accompagnement personnalisé dans le domaine des assurances de biens, de personnes et de responsabilités.
           </motion.p>
           
@@ -375,7 +359,7 @@ const ServicesOverview = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             <span className="text-sm font-medium text-blue-800">
-              L'expérience à votre service
+              L&apos;expérience à votre service
             </span>
           </div>
         </motion.div>

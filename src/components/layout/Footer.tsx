@@ -1,6 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 const FooterLink = ({ href, children }: { href: string, children: React.ReactNode }) => (
   <li className="mb-2">

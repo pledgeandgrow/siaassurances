@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 type ServiceCardProps = {
@@ -351,7 +351,7 @@ const Services = () => {
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
-            Besoin d'une solution personnalisée pour votre entreprise ?
+            Besoin d&apos;une solution personnalisée pour votre entreprise ?
           </motion.h3>
           
           <motion.div

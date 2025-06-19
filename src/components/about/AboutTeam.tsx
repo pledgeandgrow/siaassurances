@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const AboutTeam = () => {
@@ -178,7 +177,7 @@ const AboutTeam = () => {
                   transition={{ delay: 0.6, duration: 0.5 }}
                 >
                   <p className="text-gray-600 mb-4 leading-relaxed">
-                    <span className="font-medium text-blue-700">Titulaire d'un Master 2 en Droit des affaires</span>, spécialisé en assurances / banque, j'ai travaillé pendant plus de 10 ans dans les compagnies d'assurance et les grands cabinets de courtage (Paris et Rennes).
+                    <span className="font-medium text-blue-700">Titulaire d&apos;un Master 2 en Droit des affaires</span>, spécialisé en assurances / banque, j&apos;ai travaillé pendant plus de 10 ans dans les compagnies d&apos;assurance et les grands cabinets de courtage (Paris et Rennes).
                   </p>
                   
                   <div className="flex gap-2">

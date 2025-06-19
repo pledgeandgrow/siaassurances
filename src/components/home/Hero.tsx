@@ -2,10 +2,8 @@
 
 import React, { useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import Button from '@/components/ui/Button';
 import { useRippleEffect } from '@/hooks/useRippleEffect';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 // Variants simplifiés pour les animations Framer Motion
 const containerVariants = {
@@ -34,10 +32,9 @@ const buttonBaseStyle = "flex items-center justify-center px-6 py-3 rounded-lg t
 // Composant pour les badges de services
 interface ServiceBadgeProps {
   text: string;
-  delay: string;
 }
 
-const ServiceBadge = ({ text, delay }: ServiceBadgeProps) => (
+const ServiceBadge = ({ text }: ServiceBadgeProps) => (
   <div className="inline-block bg-blue-800 bg-opacity-80 text-white text-sm font-medium px-4 py-2 rounded-full shadow-md hover:bg-blue-700 transition-colors duration-200">
     {text}
   </div>
@@ -79,10 +76,10 @@ const Hero = () => {
               className="flex flex-wrap gap-2 mb-6"
               variants={itemVariants}
             >
-              <ServiceBadge text="Décennale" delay="0.1" />
-              <ServiceBadge text="RC Pro" delay="0.2" />
-              <ServiceBadge text="Prévoyance" delay="0.3" />
-              <ServiceBadge text="Mutuelle santé" delay="0.4" />
+              <ServiceBadge text="Décennale" />
+              <ServiceBadge text="RC Pro" />
+              <ServiceBadge text="Prévoyance" />
+              <ServiceBadge text="Mutuelle santé" />
             </motion.div>
 
             {/* Titre principal */}
@@ -91,7 +88,7 @@ const Hero = () => {
               variants={itemVariants}
             >
               <motion.span className="block">
-                L'assurance
+                L&apos;assurance
               </motion.span>
               <motion.span className="block text-blue-700">
                 qui vous protège
@@ -103,7 +100,7 @@ const Hero = () => {
               className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl"
               variants={itemVariants}
             >
-              Cabinet de courtage spécialisé dans l'assurance construction et l'assurance de personnes. 
+              Cabinet de courtage spécialisé dans l&apos;assurance construction et l&apos;assurance de personnes. 
               Un accompagnement personnalisé dans le domaine des assurances de biens, de personnes et de responsabilités.
             </motion.p>
 
@@ -137,7 +134,7 @@ const Hero = () => {
                 <svg className="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
                 </svg>
-                <span>Plus de 10 ans d'expérience</span>
+                <span>Plus de 10 ans d&apos;expérience</span>
               </div>
               <div className="flex items-center">
                 <svg className="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -181,21 +178,21 @@ const Hero = () => {
                       <div className="absolute inset-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/20"></div>
                       <div className="relative z-10 text-white text-center">
                         <div className="font-bold text-4xl md:text-5xl mb-2">10+</div>
-                        <div className="text-md md:text-lg font-medium">Années d'expérience</div>
+                        <div className="text-md md:text-lg font-medium">Années d&apos;expérience</div>
                       </div>
                     </div>
                   </div>
                   
                   <div className="text-center">
                     <h2 className="text-white text-xl md:text-3xl font-bold mb-4">
-                      Cabinet<br/>d'expertise
+                      Cabinet<br/>d&apos;expertise
                     </h2>
                     <p className="text-blue-100 text-md md:text-lg max-w-md mx-auto">
                       Un accompagnement personnalisé dans le domaine des assurances de biens, de personnes et de responsabilités
                     </p>
                   </div>
                   
-                  {/* Indicateurs de confiance - Remis à l'intérieur de la carte bleue */}
+                  {/* Indicateurs de confiance - Remis à l&apos;intérieur de la carte bleue */}
                   <div className="mt-8 mb-6 w-full grid grid-cols-2 gap-4 max-w-md mx-auto">
                     <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center shadow-lg">
                       <div className="text-white text-xl md:text-2xl font-bold">1000+</div>

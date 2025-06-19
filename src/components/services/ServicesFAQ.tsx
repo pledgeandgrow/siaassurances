@@ -126,7 +126,7 @@ const ServicesFAQ = () => {
             transition={{ delay: 0.4, duration: 0.8 }}
           />
           <p className="text-gray-600">
-            Retrouvez les réponses aux questions les plus fréquemment posées sur nos services d'assurance.
+            Retrouvez les réponses aux questions les plus fréquemment posées sur nos services d&apos;assurance.
           </p>
         </div>
 

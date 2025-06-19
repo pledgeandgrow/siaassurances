@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Button from '@/components/ui/Button';
 import { useRippleEffect } from '@/hooks/useRippleEffect';
+import Link from 'next/link';
 import DevisProgress from './DevisProgress';
 import DevisStepOne from './DevisStepOne';
 import DevisStepTwo from './DevisStepTwo';
@@ -210,9 +211,9 @@ const DevisForm = () => {
                   <p>Merci pour votre demande de devis. Un de nos conseillers vous contactera très prochainement.</p>
                 </div>
                 <div className="mt-4">
-                  <a href="/" className="text-sm font-medium text-blue-600 hover:text-blue-700 underline">
+                  <Link href="/" className="text-sm font-medium text-blue-600 hover:text-blue-700 underline">
                     Retour à l&apos;accueil
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>

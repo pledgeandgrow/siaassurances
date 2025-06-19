@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { useRippleEffect } from '@/hooks/useRippleEffect';
+// Removed unused import
+// import { useRippleEffect } from '@/hooks/useRippleEffect';
 import { buildingIcon, personIcon, shieldIcon, documentIcon, chatIcon, boltIcon } from './icons';
 import Image from 'next/image';
 
@@ -34,7 +35,7 @@ const Button: React.FC<ButtonProps> = ({ href, variant = 'primary', size = 'md',
   const classes = `${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
   
   return href ? (
-    <a href={href} className={classes} onClick={onClick as any}>
+    <a href={href} className={classes} onClick={(e: React.MouseEvent<HTMLAnchorElement>) => onClick && onClick(e)}>
       {children}
     </a>
   ) : (
@@ -266,7 +267,7 @@ interface ServiceTabProps {
 }
 
 // Composant pour les onglets de navigation des services
-const ServiceTab: React.FC<ServiceTabProps> = ({ id, name, icon, isActive, onClick }) => {
+const ServiceTab: React.FC<ServiceTabProps> = ({ name, icon, isActive, onClick }) => {
   return (
     <motion.button
       onClick={onClick}
@@ -298,9 +299,7 @@ const ServiceTab: React.FC<ServiceTabProps> = ({ id, name, icon, isActive, onCli
 };
 
 // Composant pour le détail d'un service individuel
-const ServiceDetailsItem = ({ id, title, description, icon, features, benefits, imageSrc, cta }: ServiceDetailsProps) => {
-  const { createRipple } = useRippleEffect();
-  
+const ServiceDetailsItem = ({ id, title, description, icon, features, benefits, imageSrc, cta }: ServiceDetailsProps) => {  
   return (
     <motion.div 
       id={id}
@@ -374,7 +373,8 @@ const ServiceDetailsItem = ({ id, title, description, icon, features, benefits, 
                 variant="primary"
                 size="lg"
                 className="shadow-lg hover:shadow-blue-200/50"
-                onClick={(e) => createRipple(e as any)}
+                // Removed createRipple call since it's no longer available
+                onClick={() => {}}
               >
                 {cta.text}
               </Button>
@@ -523,20 +523,11 @@ const ServiceDetailsItem = ({ id, title, description, icon, features, benefits, 
 const ServicesDetail = () => {
   // Aucun onglet actif par défaut
   const [activeTab, setActiveTab] = useState("");
-  const { createRipple } = useRippleEffect();
+  // Commented out as it's unused
+  // const { createRipple } = useRippleEffect();
   const contentRef = useRef<HTMLDivElement>(null);
   const isInitialMount = useRef(true);
   const isManualChange = useRef(false);
-  
-  // Références pour chaque section de service
-  const sectionRefs = {
-    biens: useRef<HTMLDivElement>(null),
-    personne: useRef<HTMLDivElement>(null),
-    rc: useRef<HTMLDivElement>(null),
-    audit: useRef<HTMLDivElement>(null),
-    conseil: useRef<HTMLDivElement>(null),
-    sinistre: useRef<HTMLDivElement>(null),
-  };
   
   // Animation variants pour le conteneur principal
   const pageVariants = {
@@ -652,9 +643,9 @@ const ServicesDetail = () => {
           >
             Assurances professionnelles
           </motion.span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Nos produits d'assurance</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">Nos produits d&apos;assurance</h2>
           <div className="w-20 h-1 bg-blue-800 mx-auto mb-6 rounded-full"></div>
-          <p className="text-gray-600 text-lg">Découvrez nos solutions d'assurance spécialisées pour les professionnels du bâtiment et les chefs d'entreprise.</p>
+          <p className="text-gray-600 text-lg">Découvrez nos solutions d&apos;assurance spécialisées pour les professionnels du bâtiment et les chefs d&apos;entreprise.</p>
         </motion.div>
         
         <div className="flex flex-col lg:flex-row gap-8 mb-12">

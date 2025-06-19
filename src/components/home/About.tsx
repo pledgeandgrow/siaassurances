@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useRef } from 'react';
-import Image from 'next/image';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 const About = () => {
@@ -150,16 +149,16 @@ const About = () => {
               className="mt-3 text-lg text-gray-600 leading-relaxed"
               variants={itemVariants}
             >
-              Titulaire d'un Master 2 en Droit des affaires, spécialisé en assurances / banque, j'ai travaillé pendant plus de 10 ans
-              dans les compagnies d'assurance et les grands cabinets de courtage (Paris et Rennes).
+              Titulaire d&apos;un Master 2 en Droit des affaires, spécialisé en assurances / banque, j&apos;ai travaillé pendant plus de 10 ans
+              dans les compagnies d&apos;assurance et les grands cabinets de courtage (Paris et Rennes).
             </motion.p>
             
             <motion.p 
               className="mt-3 text-lg text-gray-600 leading-relaxed"
               variants={itemVariants}
             >
-              Aujourd'hui, je souhaite mettre cette expertise à votre service à travers le cabinet SIA Assurances dédié au
-              courtage, audit et conseil dans les risques d'entreprise notamment en assurance construction.
+              Aujourd&apos;hui, je souhaite mettre cette expertise à votre service à travers le cabinet SIA Assurances dédié au
+              courtage, audit et conseil dans les risques d&apos;entreprise notamment en assurance construction.
             </motion.p>
             
             <motion.div className="mt-10 space-y-8" variants={containerVariants}>
@@ -180,7 +179,7 @@ const About = () => {
                   </motion.div>
                 </div>
                 <div className="ml-4">
-                  <h3 className="text-lg font-semibold text-gray-900">Protection de l'activité</h3>
+                  <h3 className="text-lg font-semibold text-gray-900">Protection de l&apos;activité</h3>
                   <p className="mt-2 text-base text-gray-600">
                     Décennale, responsabilité civile professionnelle et générale pour sécuriser votre entreprise.
                   </p>
@@ -230,7 +229,7 @@ const About = () => {
                 <div className="ml-4">
                   <h3 className="text-lg font-semibold text-gray-900">Protection personnelle</h3>
                   <p className="mt-2 text-base text-gray-600">
-                    Solutions pour protéger l'artisan et le chef d'entreprise (santé, prévoyance et homme-clé).
+                    Solutions pour protéger l&apos;artisan et le chef d&apos;entreprise (santé, prévoyance et homme-clé).
                   </p>
                 </div>
               </motion.div>

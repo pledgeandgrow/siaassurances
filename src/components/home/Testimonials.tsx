@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type TestimonialProps = {
@@ -11,7 +11,7 @@ type TestimonialProps = {
   avatar?: string;
 };
 
-const TestimonialCard = ({ content, author, role, avatar }: TestimonialProps) => {
+const TestimonialCard = ({ content, author, role }: TestimonialProps) => {
   return (
     <motion.div 
       className="bg-white rounded-xl p-8 relative overflow-hidden group backdrop-blur-sm border border-gray-100/80 shadow-lg"
@@ -106,7 +106,7 @@ const TestimonialCard = ({ content, author, role, avatar }: TestimonialProps) =>
             animate={{ opacity: [0.3, 0.6, 0.3] }}
 
           >
-            "
+            &quot;
           </motion.span>
           
           {/* Texte du témoignage */}
@@ -118,7 +118,7 @@ const TestimonialCard = ({ content, author, role, avatar }: TestimonialProps) =>
             animate={{ opacity: [0.3, 0.6, 0.3] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" as const, delay: 1.5 }}
           >
-            "
+            &quot;
           </motion.span>
         </motion.p>
         

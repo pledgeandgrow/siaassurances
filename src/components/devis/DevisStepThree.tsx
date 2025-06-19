@@ -222,7 +222,7 @@ const DevisStepThree: React.FC<DevisStepThreeProps> = ({ formData, errors, handl
         </div>
         <div>
           <h3 className="text-xl font-bold text-blue-900">Informations complémentaires</h3>
-          <p className="text-blue-800 text-sm">Détails spécifiques selon votre type d'assurance</p>
+          <p className="text-blue-800 text-sm">Détails spécifiques selon votre type d&apos;assurance</p>
         </div>
       </div>
       

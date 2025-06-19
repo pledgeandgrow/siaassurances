@@ -421,7 +421,7 @@ const DevisStepOne: React.FC<DevisStepOneProps> = ({ formData, errors, handleCha
           <div>
             <h4 className="font-semibold text-blue-800 mb-1">Protection de vos données</h4>
             <p className="text-sm text-slate-700">
-              Toutes vos informations sont protégées et ne seront utilisées que pour établir votre devis d'assurance personnalisé.
+              Toutes vos informations sont protégées et ne seront utilisées que pour établir votre devis d&apos;assurance personnalisé.
             </p>
           </div>
         </div>

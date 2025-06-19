@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const AboutHistory = () => {
@@ -67,15 +66,15 @@ const AboutHistory = () => {
             transition={{ delay: 0.5, duration: 0.5 }}
           >
             <p className="text-gray-600 leading-relaxed">
-              <span className="font-medium text-blue-800">Titulaire d'un Master 2 en Droit des affaires</span>, spécialisé en assurances / banque, j'ai travaillé pendant plus de 10 ans dans les compagnies d'assurance et les grands cabinets de courtage (Paris et Rennes).
+              <span className="font-medium text-blue-800">Titulaire d&apos;un Master 2 en Droit des affaires</span>, spécialisé en assurances / banque, j&apos;ai travaillé pendant plus de 10 ans dans les compagnies d&apos;assurance et les grands cabinets de courtage (Paris et Rennes).
             </p>
             
             <p className="text-gray-600 leading-relaxed">
-              Au cours de cette <span className="italic">riche expérience</span>, j'ai eu la chance de conseiller et d'accompagner des TPE, PME et de multinationales (fabricants, promoteurs, constructeurs de maisons individuelle, bureau d'étude et architectes et artisans,) ainsi que des particuliers dans le domaine du droit de la construction et de l'assurance construction.
+              Au cours de cette <span className="italic">riche expérience</span>, j&apos;ai eu la chance de conseiller et d&apos;accompagner des TPE, PME et de multinationales (fabricants, promoteurs, constructeurs de maisons individuelle, bureau d&apos;étude et architectes et artisans,) ainsi que des particuliers dans le domaine du droit de la construction et de l&apos;assurance construction.
             </p>
             
             <p className="text-gray-600 leading-relaxed">
-              Aujourd'hui, je souhaite mettre cette expertise à votre service à travers le cabinet SIA Assurances dédié au courtage, audit et conseil dans les risques d'entreprise notamment en assurance construction.
+              Aujourd&apos;hui, je souhaite mettre cette expertise à votre service à travers le cabinet SIA Assurances dédié au courtage, audit et conseil dans les risques d&apos;entreprise notamment en assurance construction.
             </p>
           </motion.div>
           
@@ -92,7 +91,7 @@ const AboutHistory = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
                 </svg>
               </span>
-              <span>L'objectif est d'aider les artisans et les chefs d'entreprise à mieux choisir la couverture de leurs risques</span>
+              <span>L&apos;objectif est d&apos;aider les artisans et les chefs d&apos;entreprise à mieux choisir la couverture de leurs risques</span>
             </div>
           </motion.div>
         </motion.div>
@@ -143,7 +142,7 @@ const AboutHistory = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 0.5 }}
             >
-              Protéger votre activité, vos moyens de production<br />et vous-même en tant que chef d'entreprise
+              Protéger votre activité, vos moyens de production<br />et vous-même en tant que chef d&apos;entreprise
             </motion.p>
             
             <motion.div

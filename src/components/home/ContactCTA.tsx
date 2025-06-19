@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -29,18 +29,6 @@ const ContactCTA = () => {
         stiffness: 100,
         damping: 10
       }
-    }
-  };
-  
-  // Effet de pulsation pour attirer l'attention
-  const pulseAnimation = {
-    scale: [1, 1.02],
-    transition: {
-      duration: 2,
-      ease: "easeInOut" as const,
-      repeat: Infinity,
-      repeatType: "reverse" as const,
-      type: "tween" as const
     }
   };
   
@@ -171,7 +159,7 @@ const ContactCTA = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3, duration: 0.6 }}
                 >
-                  L'expérience à
+                  L&apos;expérience à
                 </motion.span>
                 <motion.span 
                   className="block relative z-10"
@@ -229,7 +217,7 @@ const ContactCTA = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9, duration: 0.6 }}
             >
-              L'expérience acquise auprès des compagnies et les courtiers de renom nous permet 
+              L&apos;expérience acquise auprès des compagnies et les courtiers de renom nous permet 
               de vous proposer les meilleures solutions en fonction de vos besoins spécifiques.
             </motion.p>
             
@@ -385,7 +373,7 @@ const ContactCTA = () => {
                       initial={{ opacity: 1 }}
                       whileHover={{ scale: 1.05 }}
                     >
-                      Contactez-moi
+                      Contactez-nous aujourd&apos;hui
                     </motion.span>
                   </motion.span>
                 </Link>
