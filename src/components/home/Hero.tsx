@@ -1,52 +1,214 @@
-import React from 'react';
+'use client';
+
+import React, { useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import Button from '@/components/ui/Button';
+import { useRippleEffect } from '@/hooks/useRippleEffect';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+
+// Variants simplifiés pour les animations Framer Motion
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.5
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3
+    }
+  }
+};
+
+// Style global pour les boutons d'action
+const buttonBaseStyle = "flex items-center justify-center px-6 py-3 rounded-lg text-base font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md";
+
+// Composant pour les badges de services
+interface ServiceBadgeProps {
+  text: string;
+  delay: string;
+}
+
+const ServiceBadge = ({ text, delay }: ServiceBadgeProps) => (
+  <div className="inline-block bg-blue-800 bg-opacity-80 text-white text-sm font-medium px-4 py-2 rounded-full shadow-md hover:bg-blue-700 transition-colors duration-200">
+    {text}
+  </div>
+);
 
 const Hero = () => {
+  // Hook pour l'effet ripple sur les boutons
+  const { createRipple } = useRippleEffect();
+  
+  // Référence pour détecter quand le composant est visible
+  const heroRef = useRef(null);
+  const isInView = useInView(heroRef, { once: true, margin: "-100px" });
+  
+  // Effet de parallax supprimé pour améliorer les performances
+  
   return (
-    <div className="relative bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-          <svg
-            className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
-            fill="currentColor"
-            viewBox="0 0 100 100"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <polygon points="50,0 100,0 50,100 0,100" />
+    <div ref={heroRef} className="relative bg-gradient-to-b from-white to-blue-50 pt-8 pb-12 overflow-hidden">
+      {/* Éléments décoratifs simplifiés pour améliorer les performances */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Vagues décoratives simplifiées */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 opacity-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full">
+            <path fill="currentColor" className="text-blue-700" fillOpacity="1" d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,138.7C672,139,768,181,864,181.3C960,181,1056,139,1152,122.7C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
           </svg>
-
-          <div className="relative pt-6 px-4 sm:px-6 lg:px-8"></div>
-
-          <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-            <div className="sm:text-center lg:text-left">
-              <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                <span className="block xl:inline">SIA Assurances</span>{' '}
-                <span className="block text-blue-600 xl:inline">Votre courtier de confiance</span>
-              </h1>
-              <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                Cabinet de courtage, SIA Assurances met à votre service toute une expertise acquise dans le domaine des assurances de biens, de personnes et de responsabilités.
-              </p>
-              <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                <div className="rounded-md shadow">
-                  <Link href="/contact" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10">
-                    Nous contacter
-                  </Link>
-                </div>
-                <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <Link href="/services" className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 md:py-4 md:text-lg md:px-10">
-                    Nos services
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </main>
         </div>
       </div>
-      <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-        <div className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full bg-gradient-to-r from-blue-400 to-blue-600">
-          <div className="h-full w-full flex items-center justify-center">
-            <div className="text-white text-4xl font-bold">Courtage • Audit • Conseil</div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+          {/* Partie gauche - Texte principal */}
+          <motion.div 
+            className="lg:col-span-7 xl:col-span-6 lg:mt-0 flex flex-col justify-center"
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={containerVariants}
+          >
+            {/* Badges de services */}
+            <motion.div 
+              className="flex flex-wrap gap-2 mb-6"
+              variants={itemVariants}
+            >
+              <ServiceBadge text="Décennale" delay="0.1" />
+              <ServiceBadge text="RC Pro" delay="0.2" />
+              <ServiceBadge text="Prévoyance" delay="0.3" />
+              <ServiceBadge text="Mutuelle santé" delay="0.4" />
+            </motion.div>
+
+            {/* Titre principal */}
+            <motion.h1 
+              className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 mb-6"
+              variants={itemVariants}
+            >
+              <motion.span className="block">
+                L'assurance
+              </motion.span>
+              <motion.span className="block text-blue-700">
+                qui vous protège
+              </motion.span>
+            </motion.h1>
+
+            {/* Texte descriptif */}
+            <motion.p 
+              className="text-lg md:text-xl text-gray-600 mb-8 max-w-3xl"
+              variants={itemVariants}
+            >
+              Cabinet de courtage spécialisé dans l'assurance construction et l'assurance de personnes. 
+              Un accompagnement personnalisé dans le domaine des assurances de biens, de personnes et de responsabilités.
+            </motion.p>
+
+            {/* Boutons d'action */}
+            <motion.div 
+              className="flex flex-wrap gap-4 mb-8"
+              variants={itemVariants}
+            >
+              <button 
+                className={`${buttonBaseStyle} bg-blue-700 hover:bg-blue-800 text-white focus:ring-blue-500`}
+                onClick={(e) => createRipple(e)}
+              >
+                <span className="mr-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </span>
+                Demander un devis
+              </button>
+              <Link href="/contact" className={`${buttonBaseStyle} bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-blue-500`}>
+                Nous contacter
+              </Link>
+            </motion.div>
+
+            {/* Indicateurs de confiance */}
+            <motion.div 
+              className="flex flex-wrap items-center gap-6 text-gray-500"
+              variants={itemVariants}
+            >
+              <div className="flex items-center">
+                <svg className="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                </svg>
+                <span>Plus de 10 ans d'expérience</span>
+              </div>
+              <div className="flex items-center">
+                <svg className="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path>
+                </svg>
+                <span>Engagement de réponse sous 24H</span>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Partie droite - Visuel */}
+          <div className="lg:col-span-5 xl:col-span-6 mt-12 lg:mt-0">
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              {/* Fond décoratif */}
+              <motion.div 
+                className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl overflow-hidden shadow-xl"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
+              >
+                {/* Motif de grille */}
+                <div className="absolute inset-0 opacity-15">
+                  <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none">
+                    <pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse">
+                      <rect width="1" height="1" fill="#FFFFFF"></rect>
+                    </pattern>
+                    <rect width="100" height="100" fill="url(#grid)"></rect>
+                  </svg>
+                </div>
+                
+                {/* Contenu de la partie droite */}
+                <div className="relative flex flex-col items-center justify-center p-8 z-10 py-12 lg:py-16">
+                  {/* Image symbolique de construction */}
+                  <div className="mb-10">
+                    <div className="relative w-44 h-44 md:w-56 md:h-56 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
+                      <div className="absolute inset-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/20"></div>
+                      <div className="relative z-10 text-white text-center">
+                        <div className="font-bold text-4xl md:text-5xl mb-2">10+</div>
+                        <div className="text-md md:text-lg font-medium">Années d'expérience</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-center">
+                    <h2 className="text-white text-xl md:text-3xl font-bold mb-4">
+                      Cabinet<br/>d'expertise
+                    </h2>
+                    <p className="text-blue-100 text-md md:text-lg max-w-md mx-auto">
+                      Un accompagnement personnalisé dans le domaine des assurances de biens, de personnes et de responsabilités
+                    </p>
+                  </div>
+                  
+                  {/* Indicateurs de confiance - Remis à l'intérieur de la carte bleue */}
+                  <div className="mt-8 mb-6 w-full grid grid-cols-2 gap-4 max-w-md mx-auto">
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center shadow-lg">
+                      <div className="text-white text-xl md:text-2xl font-bold">1000+</div>
+                      <div className="text-blue-100 text-sm">Clients satisfaits</div>
+                    </div>
+                    <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center shadow-lg">
+                      <div className="text-white text-xl md:text-2xl font-bold">99%</div>
+                      <div className="text-blue-100 text-sm">Taux de satisfaction</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -55,3 +217,5 @@ const Hero = () => {
 };
 
 export default Hero;
+
+// Remarque: Les animations CSS keyframes ne sont plus nécessaires car nous utilisons maintenant Framer Motion

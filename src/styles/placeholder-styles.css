@@ -1,0 +1,15 @@
+/* Styles pour améliorer le contraste des placeholders */
+::placeholder {
+  color: #4b5563 !important; /* text-gray-600 */
+  opacity: 1 !important;
+}
+
+:-ms-input-placeholder {
+  color: #4b5563 !important; /* text-gray-600 */
+  opacity: 1 !important;
+}
+
+::-ms-input-placeholder {
+  color: #4b5563 !important; /* text-gray-600 */
+  opacity: 1 !important;
+}

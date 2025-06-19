@@ -3,9 +3,49 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #1e40af;
+  --primary-light: #3b82f6;
+  --primary-dark: #1e3a8a;
 }
 
-@theme inline {
+/* Animations pour le composant Hero et autres éléments */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideIn {
+  0% { transform: translateX(-20px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Animation pour effet ripple */
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Animation pour loading spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animation pour boutons et autres éléments interactifs */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+/* Variables globales pour les couleurs et les polices */
+:root {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -23,4 +63,41 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Styles améliorés pour le formulaire de devis */
+.devis-form input,
+.devis-form textarea,
+.devis-form select {
+  color: #334155; /* slate-700 - texte foncé pour meilleure lisibilité */
+  font-weight: 500;
+}
+
+.devis-form input::placeholder,
+.devis-form textarea::placeholder,
+.devis-form select::placeholder {
+  color: #2563eb; /* blue-600 */
+  opacity: 0.7;
+}
+
+.devis-form label {
+  font-weight: 500;
+  color: #1e40af; /* blue-800 */
+}
+
+.devis-form .form-group {
+  margin-bottom: 1.25rem;
+}
+
+.devis-form .input-focus {
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.15);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Effet de surbrillance au survol des inputs */
+.devis-form input:hover,
+.devis-form textarea:hover,
+.devis-form select:hover {
+  border-color: #60a5fa; /* blue-400 */
 }
