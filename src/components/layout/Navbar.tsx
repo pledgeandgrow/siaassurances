@@ -62,11 +62,13 @@ const Navbar = () => {
               aria-label="Accueil SIA Assurances"
             >
               {/* Logo avec effet hover - style adaptatif selon la transparence */}
-              <div 
-                className="h-9 w-40 relative flex items-center justify-center rounded-md overflow-hidden transition-all duration-300 bg-gradient-to-r from-blue-900 to-blue-700 shadow-md group-hover:shadow-lg"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-950 to-blue-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="font-bold text-lg relative z-10 transition-colors text-white">SIA Assurances</span>
+              <div className="flex items-center p-1">
+                <img 
+                  src="/logo.png" 
+                  alt="SIA Assurances" 
+                  className="h-10 w-auto max-w-[160px]"
+                />
+                <span className="ml-2 text-lg font-semibold text-blue-800">SIA Assurances</span>
               </div>
             </Link>
           </div>
@@ -105,9 +107,11 @@ const Navbar = () => {
             </Link>
             <Button 
               href="/contact" 
-              variant="outline" 
-              size="sm"
-              className={`ml-4 ${isActive('/contact') ? 'bg-blue-100 border border-blue-300' : ''}`}
+              variant="text"
+              className={`px-3 py-1.5 rounded-md font-medium transition-all duration-300 relative ml-4
+                ${isActive('/contact') 
+                  ? 'text-blue-800 bg-blue-50/80 backdrop-blur-sm' 
+                  : 'text-gray-700 hover:bg-blue-50 hover:text-blue-800'}`}
               aria-current={isActive('/contact') ? 'page' : undefined}
               onClick={createRipple}
             >
@@ -118,7 +122,7 @@ const Navbar = () => {
               href="/devis" 
               variant="primary" 
               size="sm"
-              className="ml-2"
+              className="ml-2 bg-blue-600 hover:bg-blue-700"
               aria-current={isActive('/devis') ? 'page' : undefined}
               icon={
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

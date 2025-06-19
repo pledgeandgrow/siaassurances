@@ -46,7 +46,7 @@ const About = () => {
           >
             <div className="relative lg:h-96 h-72 rounded-2xl shadow-2xl overflow-hidden">
               <div className="h-full w-full relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-700 to-blue-900 opacity-95"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-dark opacity-95"></div>
                 {/* Pattern décoratif */}
                 <div className="absolute inset-0 opacity-20">
                   <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -62,11 +62,15 @@ const About = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center p-8">
                     <motion.div 
-                      className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6"
-                      whileHover={{ scale: 1.05, rotate: 5 }}
+                      className="w-32 h-32 flex items-center justify-center mx-auto mb-6"
+                      whileHover={{ scale: 1.05 }}
                       transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
                     >
-                      <span className="text-white text-3xl font-bold">SIA</span>
+                      <img 
+                        src="/logo.png" 
+                        alt="SIA Assurances" 
+                        className="w-32 h-auto max-w-full"
+                      />
                     </motion.div>
                     <motion.h3 
                       className="text-white text-3xl font-bold"
