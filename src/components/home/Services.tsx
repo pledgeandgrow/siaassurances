@@ -17,10 +17,8 @@ const ServiceCard = ({ title, description, icon }: ServiceCardProps) => {
         y: -8,
         boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.3)",
       }}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ type: "spring" as const, stiffness: 50, damping: 15 }}
+      initial={{ opacity: 1, y: 0 }}
+      animate={{ opacity: 1, y: 0 }}
     >
       {/* Élément décoratif d'arrière-plan avec animation */}
       <motion.div 
@@ -117,19 +115,14 @@ const ServiceCard = ({ title, description, icon }: ServiceCardProps) => {
 };
 
 const Services = () => {
-  // Animation variants pour les éléments du composant
+  // Animation variants sans effet d'apparition
   const containerVariants = {
-    hidden: { opacity: 0 },
     visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      opacity: 1
     }
   };
   
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
   };
   
@@ -203,8 +196,8 @@ const Services = () => {
         
         <motion.div 
           className="text-center relative z-10"
-          initial="hidden"
-          whileInView="visible"
+          initial="visible"
+          animate="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
         >
@@ -237,9 +230,9 @@ const Services = () => {
           <motion.p 
             className="max-w-2xl mx-auto text-xl text-gray-600 leading-relaxed"
             variants={itemVariants}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            // initial={{ opacity: 0, y: 20 }}
+            // whileInView={{ opacity: 1, y: 0 }}
+            // transition={{ delay: 0.3, duration: 0.5 }}
           >
             Une expertise complète pour répondre à tous vos besoins en assurance
           </motion.p>
@@ -320,15 +313,15 @@ const Services = () => {
         {/* Section CTA avec animation et effets visuels */}
         <motion.div 
           className="mt-20 text-center relative z-10"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ 
-            type: "spring" as const, 
-            stiffness: 50, 
-            damping: 15,
-            delay: 0.6
-          }}
+          // initial={{ opacity: 0, y: 30 }}
+          // whileInView={{ opacity: 1, y: 0 }}
+          // viewport={{ once: true, margin: "-50px" }}
+          // transition={{ 
+          //   type: "spring" as const, 
+          //   stiffness: 50, 
+          //   damping: 15,
+          //   delay: 0.6
+          // }}
         >
           {/* Élément décoratif ligne zigzag */}
           <div className="flex justify-center mb-8">
@@ -338,18 +331,18 @@ const Services = () => {
                 stroke="#93C5FD" 
                 strokeWidth="2"
                 strokeLinecap="round"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                transition={{ duration: 1.5, ease: "easeInOut" as const, delay: 0.8 }}
+                // initial={{ pathLength: 0, opacity: 0 }}
+                // animate={{ pathLength: 1, opacity: 1 }}
+                // transition={{ duration: 1.5, ease: "easeInOut" as const, delay: 0.8 }}
               />
             </svg>
           </div>
           
           <motion.h3 
             className="text-2xl font-bold text-gray-800 mb-6"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.9 }}
+            // initial={{ opacity: 0 }}
+            // whileInView={{ opacity: 1 }}
+            // transition={{ delay: 0.9 }}
           >
             Besoin d&apos;une solution personnalisée pour votre entreprise ?
           </motion.h3>

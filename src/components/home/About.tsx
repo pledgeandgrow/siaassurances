@@ -1,33 +1,23 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 
 const About = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
   
-  // Animation pour les éléments qui apparaissent un par un
+  // Animation sans effet d'apparition
   const containerVariants = {
-    hidden: { opacity: 0 },
     visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
+      opacity: 1
     }
   };
   
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
-      y: 0, 
-      transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 12
-      }
+      y: 0
     }
   };
   
@@ -49,14 +39,13 @@ const About = () => {
           {/* Colonne de gauche - image/logo avec effet parallax */}
           <motion.div 
             className="relative"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: isInView ? 1 : 0, scale: isInView ? 1 : 0.95 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            initial={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
             style={{ y }}
           >
             <div className="relative lg:h-96 h-72 rounded-2xl shadow-2xl overflow-hidden">
               <div className="h-full w-full relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-700 to-blue-900 opacity-95"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-dark opacity-95"></div>
                 {/* Pattern décoratif */}
                 <div className="absolute inset-0 opacity-20">
                   <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
@@ -72,31 +61,34 @@ const About = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center p-8">
                     <motion.div 
-                      className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-6"
-                      whileHover={{ scale: 1.05, rotate: 5 }}
+                      className="w-32 h-32 flex items-center justify-center mx-auto mb-6"
+                      whileHover={{ scale: 1.05 }}
                       transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
                     >
-                      <span className="text-white text-3xl font-bold">SIA</span>
+                      <Image 
+                        src="/logo.png" 
+                        alt="SIA Assurances" 
+                        width={128}
+                        height={64}
+                        className="w-32 h-auto max-w-full"
+                      />
                     </motion.div>
                     <motion.h3 
                       className="text-white text-3xl font-bold"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 10 }}
-                      transition={{ duration: 0.6, delay: 0.4 }}
+                      initial={{ opacity: 1, y: 0 }}
+                      animate={{ opacity: 1, y: 0 }}
                     >
                       SIA Assurances
                     </motion.h3>
                     <motion.div 
-                      className="w-12 h-1 bg-blue-300 mx-auto my-4"
-                      initial={{ width: 0 }}
-                      animate={{ width: isInView ? 48 : 0 }}
-                      transition={{ duration: 0.8, delay: 0.6 }}
+                      className="h-0.5 w-12 bg-white mx-auto my-3"
+                      initial={{ width: 48 }}
+                      animate={{ width: 48 }}
                     ></motion.div>
                     <motion.p 
                       className="text-blue-50 text-lg"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: isInView ? 1 : 0 }}
-                      transition={{ duration: 0.6, delay: 0.8 }}
+                      initial={{ opacity: 1 }}
+                      animate={{ opacity: 1 }}
                     >
                       Cabinet de courtage, audit et conseil
                     </motion.p>
@@ -124,8 +116,8 @@ const About = () => {
           <motion.div 
             className="mt-12 lg:mt-0"
             variants={containerVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            initial="visible"
+            animate="visible"
           >
             <motion.div className="mb-2" variants={itemVariants}>
               <span className="inline-block px-4 py-1.5 text-sm font-medium text-blue-800 bg-blue-100 rounded-full">

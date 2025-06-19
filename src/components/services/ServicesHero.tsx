@@ -7,43 +7,24 @@ const ServicesHero = () => {
   // Référence pour l'effet de parallaxe
   const heroRef = useRef<HTMLDivElement>(null);
 
-  // Animation variants pour les éléments
+  // Animation variants pour les éléments sans effet d'apparition
   const titleVariants = {
-    hidden: { opacity: 0, y: 30 },
     visible: { 
       opacity: 1, 
-      y: 0, 
-      transition: { 
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 15,
-        delay: 0.2
-      }
+      y: 0
     }
   };
   
   const descriptionVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
     visible: { 
       opacity: 1, 
-      scale: 1, 
-      transition: { 
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 20,
-        delay: 0.5
-      }
+      scale: 1
     }
   };
   
   const decorationVariants = {
-    hidden: { opacity: 0 },
     visible: { 
-      opacity: 1, 
-      transition: { 
-        staggerChildren: 0.2,
-        delayChildren: 0.8
-      }
+      opacity: 1
     }
   };
   
@@ -74,7 +55,7 @@ const ServicesHero = () => {
       {/* Éléments décoratifs en arrière-plan */}
       <motion.div 
         className="absolute inset-0 z-0 opacity-30"
-        initial="hidden"
+        initial="visible"
         animate="visible"
         variants={decorationVariants}
       >
@@ -82,11 +63,9 @@ const ServicesHero = () => {
         <motion.div 
           className="parallax-element absolute top-10 left-[10%] w-64 h-64 rounded-full bg-gradient-to-r from-blue-400 to-indigo-500 blur-[80px] opacity-40"
           variants={{
-            hidden: { opacity: 0, scale: 0.8 },
             visible: { 
               opacity: 0.4, 
-              scale: 1,
-              transition: { duration: 1.5, ease: "easeOut" }
+              scale: 1
             }
           }}
           animate={{
@@ -103,11 +82,9 @@ const ServicesHero = () => {
         <motion.div 
           className="parallax-element absolute top-[60%] right-[5%] w-40 h-40 rounded-full bg-gradient-to-l from-blue-300 to-indigo-600 blur-[60px] opacity-40"
           variants={{
-            hidden: { opacity: 0, scale: 0.8 },
             visible: { 
               opacity: 0.4, 
-              scale: 1,
-              transition: { duration: 1.5, delay: 0.3, ease: "easeOut" }
+              scale: 1
             }
           }}
           animate={{
@@ -136,7 +113,6 @@ const ServicesHero = () => {
           const size = 1 + (i % 3);
           const top = (i * 7.3) % 100;
           const left = (i * 13.7) % 100;
-          const delay = i * 0.15;
           
           return (
             <motion.div 
@@ -149,17 +125,9 @@ const ServicesHero = () => {
                 left: `${left}%`,
               }}
               variants={{
-                hidden: { opacity: 0 },
                 visible: { 
-                  opacity: [0.4, 0.7],
-                  transition: {
-                    duration: 2,
-                    repeat: Infinity,
-                    repeatType: "reverse" as const,
-                    ease: "easeInOut" as const,
-                    type: "tween" as const,
-                    delay
-                  }
+                  opacity: 0.7, 
+                  scale: 1
                 }
               }}
             />
@@ -180,21 +148,16 @@ const ServicesHero = () => {
         
         <motion.div 
           className="w-24 h-1.5 bg-gradient-to-r from-blue-400 via-white to-blue-400 mx-auto rounded-full mb-8 shadow-lg"
-          initial={{ width: 0, opacity: 0 }}
+          initial={{ width: '6rem', opacity: 1 }}
           animate={{ 
             width: '6rem', 
-            opacity: 1,
-            transition: {
-              delay: 0.4,
-              duration: 0.8,
-              ease: "easeOut"
-            }
+            opacity: 1
           }}
         />
         
         <motion.p 
           className="text-xl md:text-2xl max-w-3xl mx-auto font-light"
-          initial="hidden"
+          initial="visible"
           animate="visible"
           variants={descriptionVariants}
         >
@@ -202,9 +165,8 @@ const ServicesHero = () => {
           <span className="font-semibold relative">
             <motion.span
               className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-300 rounded"
-              initial={{ width: 0 }}
+              initial={{ width: '100%' }}
               animate={{ width: '100%' }}
-              transition={{ delay: 1.2, duration: 0.8 }}
             />
             personnalisées
           </span> 
@@ -214,9 +176,8 @@ const ServicesHero = () => {
         {/* Badge décoratif */}
         <motion.div 
           className="mt-8 inline-block"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 1, y: 0 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.6 }}
         >
           <div className="px-4 py-2 bg-white bg-opacity-10 backdrop-blur-sm rounded-full border border-white border-opacity-20 shadow-xl">
             <div className="flex items-center space-x-2">

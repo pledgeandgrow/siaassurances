@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 type TestimonialProps = {
   id: number;
@@ -15,10 +15,8 @@ const TestimonialCard = ({ content, author, role }: TestimonialProps) => {
   return (
     <motion.div 
       className="bg-white rounded-xl p-8 relative overflow-hidden group backdrop-blur-sm border border-gray-100/80 shadow-lg"
-      initial={{ opacity: 0, y: 20, scale: 0.97 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ type: "spring" as const, stiffness: 50, damping: 15 }}
+      initial={{ opacity: 1, y: 0, scale: 1 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
       whileHover={{ 
         y: -8,
         scale: 1.03,
@@ -96,9 +94,8 @@ const TestimonialCard = ({ content, author, role }: TestimonialProps) => {
         {/* Contenu avec animation d'apparition et effet de style au survol */}
         <motion.p 
           className="text-gray-600 leading-relaxed mb-6 relative z-10 group-hover:text-gray-800 transition-colors duration-300 text-lg"
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
         >
           {/* Guillemet ouvrant décoratif */}
           <motion.span 
@@ -132,9 +129,8 @@ const TestimonialCard = ({ content, author, role }: TestimonialProps) => {
         {/* Information sur l'auteur avec animation améliorée */}
         <motion.div 
           className="flex items-center"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
         >
           <motion.div 
             className="relative flex-shrink-0 h-14 w-14 rounded-full overflow-hidden shadow-xl"
@@ -228,93 +224,29 @@ const Testimonials = () => {
     }
   ];
 
-  // État pour gérer les témoignages actuels
-  const [currentPage, setCurrentPage] = useState(0);
-  const [direction, setDirection] = useState(0);
-  const [testimonialsToShow, setTestimonialsToShow] = useState(1); // Valeur par défaut pour le SSR
+  // Nous n'avons que 3 témoignages, donc nous les affichons tous directement
+  // sans navigation ni pagination
   
-  // Navigation responsive et gérer les témoignages à afficher
-  useEffect(() => {
-    // Déterminer le nombre de témoignages à afficher en fonction de la taille de l'écran
-    const handleResize = () => {
-      const count = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
-      setTestimonialsToShow(count);
-    };
-    
-    // Exécuter immédiatement au montage du composant
-    handleResize();
-    
-    // Écouter les changements de taille d'écran
-    window.addEventListener('resize', handleResize);
-    
-    // Nettoyer l'écouteur d'événements lors du démontage
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Nous n'utilisons plus la détection de taille d'écran car tous les témoignages sont affichés
   
-  // Calcul du nombre total de pages
-  const totalPages = Math.ceil(testimonials.length / testimonialsToShow);
-  const pageIndices = Array.from({ length: totalPages }, (_, i) => i);
+  // Nous avons supprimé l'effet useEffect car nous n'utilisons plus la détection de taille d'écran
   
-  // Fonctions de navigation
-  const nextTestimonial = () => {
-    setDirection(1);
-    setCurrentPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
-  };
-  
-  const prevTestimonial = () => {
-    setDirection(-1);
-    setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
-  };
-  
-  // Récupération des témoignages à afficher sur cette page
-  const getCurrentTestimonials = () => {
-    const start = currentPage * testimonialsToShow;
-    const currentTestimonials = [];
-    
-    for (let i = 0; i < testimonialsToShow; i++) {
-      const index = (start + i) % testimonials.length;
-      currentTestimonials.push(testimonials[index]);
-    }
-    
-    return currentTestimonials;
-  };
-  
-  // Animation variants pour les éléments du composant
+  // Animation variants simplifiés sans effet d'apparition
   const containerVariants = {
-    hidden: { opacity: 0 },
     visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.3,
-        delayChildren: 0.2,
-      }
+      opacity: 1
     }
   };
   
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: "spring" as const, stiffness: 100, damping: 15 }
+    visible: {
+      opacity: 1,
+      y: 0
     }
   };
   
-  // Variantes pour animer les transitions entre les témoignages
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? 200 : -200,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction < 0 ? 200 : -200,
-      opacity: 0,
-    }),
-  };
+  // Les variantes pour les transitions entre témoignages ont été supprimées
+  // car tous les témoignages sont affichés en même temps
   
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 to-white overflow-hidden relative" id="testimonials">
@@ -380,11 +312,10 @@ const Testimonials = () => {
             ease: "easeInOut" as const 
           }}
         />
-        <motion.div 
-          className="text-center relative z-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+        <motion.div
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center"
+          initial="visible"
+          animate="visible"
           variants={containerVariants}
         >
           <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }}>
@@ -412,7 +343,8 @@ const Testimonials = () => {
           
           <motion.h2 
             className="text-3xl md:text-4xl lg:text-5xl font-extrabold mb-3 relative z-10"
-            variants={itemVariants}
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring" as const, stiffness: 200 }}
           >
@@ -477,9 +409,8 @@ const Testimonials = () => {
           <motion.p 
             className="mt-6 max-w-2xl text-xl leading-relaxed text-gray-600 mx-auto font-light"
             variants={itemVariants}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            initial={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
           >
             Découvrez les témoignages de ceux qui nous font confiance
             <motion.span 
@@ -499,29 +430,15 @@ const Testimonials = () => {
           </motion.p>
         </motion.div>
         
-        {/* Grille des témoignages avec animation */}
+        {/* Grille des témoignages sans animation de transition */}
         <div className="mt-12 relative">
-          <AnimatePresence initial={false} custom={direction} mode="wait">
-            <motion.div 
-              key={currentPage}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring" as const, stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 }
-              }}
-              className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            >
-              {getCurrentTestimonials().map((testimonial) => (
+          <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials.slice(0, 3).map((testimonial) => (
                 <motion.div 
                   key={testimonial.id}
                   className="h-full"
-                  initial={{ opacity: 0, scale: 0.92 }}
+                  initial={{ opacity: 1, scale: 1 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: testimonial.id * 0.1 % 0.3 }}
                 >
                   <TestimonialCard
                     id={testimonial.id}
@@ -531,90 +448,6 @@ const Testimonials = () => {
                   />
                 </motion.div>
               ))}
-            </motion.div>
-          </AnimatePresence>
-          
-          {/* Contrôles de navigation */}
-          <div className="mt-16 flex flex-col items-center space-y-6">
-            <div className="flex justify-center items-center space-x-4">
-              {/* Bouton précédent animé */}
-              <motion.button
-                onClick={prevTestimonial}
-                className="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 bg-white shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(59, 130, 246, 0.3)" }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {/* Effet de glow au survol */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                <motion.svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-6 w-6 text-blue-600 relative z-10" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                  initial={{ x: 0 }}
-                  whileHover={{ x: -3 }}
-                  transition={{ type: "spring" as const, stiffness: 200 }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </motion.svg>
-              </motion.button>
-              
-              {/* Indicateurs de page */}
-              <div className="flex space-x-2">
-                {pageIndices.map((index) => (
-                  <motion.button
-                    key={index}
-                    onClick={() => {
-                      setDirection(index > currentPage ? 1 : -1);
-                      setCurrentPage(index);
-                    }}
-                    className={`h-2.5 rounded-full ${index === currentPage ? 'w-8 bg-blue-500' : 'w-2.5 bg-blue-200'}`}
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                    transition={{ type: "spring" as const, stiffness: 400 }}
-                  />
-                ))}
-              </div>
-              
-              {/* Bouton suivant animé */}
-              <motion.button
-                onClick={nextTestimonial}
-                className="group flex items-center justify-center w-12 h-12 rounded-full border border-gray-200 bg-white shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden"
-                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(59, 130, 246, 0.3)" }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {/* Effet de glow au survol */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-blue-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                <motion.svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  className="h-6 w-6 text-blue-600 relative z-10" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor"
-                  initial={{ x: 0 }}
-                  whileHover={{ x: 3 }}
-                  transition={{ type: "spring" as const, stiffness: 200 }}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </motion.svg>
-              </motion.button>
-            </div>
-            
-            {/* Texte indicateur discret */}
-            <motion.div 
-              className="text-sm text-gray-500 flex items-center space-x-1"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.7 }}
-              whileHover={{ opacity: 1, scale: 1.05 }}
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-              <span>Naviguez entre les témoignages</span>
-            </motion.div>
           </div>
         </div>
       </div>

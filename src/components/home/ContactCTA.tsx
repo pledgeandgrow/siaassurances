@@ -7,28 +7,17 @@ import { motion } from 'framer-motion';
 // Composants de particules supprimés pour améliorer les performances
 
 const ContactCTA = () => {
-  // Animation variants
+  // Animation variants sans effet d'apparition
   const containerVariants = {
-    hidden: { opacity: 0 },
     visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
+      opacity: 1
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
-      y: 0,
-      transition: {
-        type: "spring" as const,
-        stiffness: 100,
-        damping: 10
-      }
+      y: 0
     }
   };
   
@@ -97,9 +86,8 @@ const ContactCTA = () => {
       {/* Effet de vagues en bas de la section */}
       <div className="absolute bottom-0 left-0 right-0 h-24 opacity-30 overflow-hidden">
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" className="w-full absolute bottom-0">
             <motion.path 
@@ -130,9 +118,8 @@ const ContactCTA = () => {
       
       <motion.div 
         className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8 relative z-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        initial="visible"
+        animate="visible"
         variants={containerVariants}
       >
         <div className="lg:flex lg:items-center lg:justify-between">

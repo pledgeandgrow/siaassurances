@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import ServicesHero from '@/components/services/ServicesHero';
 import ServicesOverview from '@/components/services/ServicesOverview';
 import ServicesDetail from '@/components/services/ServicesDetail';
 import ServicesFAQ from '@/components/services/ServicesFAQ';
@@ -13,7 +12,7 @@ export default function ServicesPage() {
   
   return (
     <div className="min-h-screen bg-gray-50">
-      <ServicesHero />
+      {/* <ServicesHero /> */}
       <ServicesOverview />
       <ServicesDetail />
       <ServicesFAQ />
