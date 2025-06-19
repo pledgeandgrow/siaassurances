@@ -14,27 +14,18 @@ type ServiceCardProps = {
   category: string; // Catégorie du service
 };
 
-// Variants pour les animations
+// Variants pour les animations sans effet d'apparition
 const cardVariants = {
-  hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 20,
-      delay: i * 0.1 + 0.3,
-    },
+    y: 0
   }),
 };
 
 const iconVariants = {
-  hidden: { scale: 0.8, opacity: 0.5 },
   visible: {
     scale: 1,
-    opacity: 1,
-    transition: { type: "spring" as const, stiffness: 300, damping: 10 }
+    opacity: 1
   },
   hover: {
     scale: 1.15,
@@ -50,11 +41,9 @@ const iconVariants = {
 };
 
 const featureVariants = {
-  hidden: { opacity: 0, x: -10 },
   visible: (i: number) => ({
     opacity: 1,
-    x: 0,
-    transition: { delay: i * 0.05 + 0.5 }
+    x: 0
   }),
   hover: { x: 5, transition: { duration: 0.2 } }
 };
@@ -64,9 +53,8 @@ const ServiceCard = ({ icon, title, description, features, index = 0 }: ServiceC
   return (
     <motion.div 
       className="relative group bg-white p-6 rounded-xl overflow-hidden"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
+      initial="visible"
+      animate="visible"
       custom={index}
       variants={cardVariants}
       whileHover={{ y: -5 }}
@@ -74,9 +62,8 @@ const ServiceCard = ({ icon, title, description, features, index = 0 }: ServiceC
       {/* Fond décoratif qui apparaît au survol */}
       <motion.div 
         className="absolute -top-16 -right-16 h-32 w-32 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 opacity-0 group-hover:opacity-60 transition-opacity duration-500 blur-xl"
-        initial={{ scale: 0 }}
-        whileInView={{ scale: 1 }}
-        transition={{ delay: index * 0.15 + 0.7, duration: 0.8 }}
+        initial={{ scale: 1 }}
+        animate={{ scale: 1 }}
       />
 
       {/* Ombre stylisée */}
@@ -136,30 +123,17 @@ const ServiceCard = ({ icon, title, description, features, index = 0 }: ServiceC
   );
 };
 
-// Variants pour les animations de la section
+// Variants pour les animations de la section sans effet d'apparition
 const sectionVariants = {
-  hidden: { opacity: 0 },
   visible: {
-    opacity: 1,
-    transition: {
-      when: "beforeChildren",
-      staggerChildren: 0.1,
-      duration: 0.6,
-    },
+    opacity: 1
   },
 };
 
 const headingVariants = {
-  hidden: { opacity: 0, y: -20 },
   visible: {
     opacity: 1,
-    y: 0,
-    transition: {
-      type: "spring" as const,
-      stiffness: 100,
-      damping: 15,
-      delay: 0.1,
-    },
+    y: 0
   },
 };
 
@@ -275,31 +249,27 @@ const ServicesOverview = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           className="text-center mb-12"
-          initial={{ opacity: 0 }}
+          initial={{ opacity: 1 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
         >
           <motion.span 
             className="text-blue-600 font-medium text-sm uppercase tracking-wider"
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.5 }}
           >
             Nos services d'assurance
           </motion.span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4 text-gray-900">Solutions d'assurance professionnelles</h2>
           <motion.div 
             className="w-20 h-1 bg-blue-600 mx-auto mb-6 rounded-full"
-            initial={{ width: 0 }}
+            initial={{ width: 80 }}
             animate={{ width: 80 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
           />
           
           <motion.p 
             className="text-gray-600 text-lg max-w-3xl mx-auto mb-8"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
           >
             Nous proposons des solutions d'assurance adaptées aux professionnels du bâtiment et aux chefs d'entreprise, 
             avec un accompagnement personnalisé dans le domaine des assurances de biens, de personnes et de responsabilités.
@@ -308,9 +278,8 @@ const ServicesOverview = () => {
           {/* Filtres de catégories */}
           <motion.div 
             className="flex flex-wrap justify-center gap-3 mb-8"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
           >
             {categories.map((category) => (
               <button
@@ -330,24 +299,17 @@ const ServicesOverview = () => {
         {filteredServices.length === 0 ? (
           <motion.div 
             className="text-center p-10 bg-gray-50 rounded-lg shadow-sm"
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
           >
             <p className="text-gray-600">Aucun service ne correspond à cette catégorie.</p>
           </motion.div>
         ) : (
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10"
-            initial="hidden"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8"
+            initial="visible"
             animate="visible"
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.1
-                }
-              }
-            }}
+            variants={sectionVariants}
           >
             {filteredServices.map((service, index) => (
               <ServiceCard 

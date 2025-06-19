@@ -7,24 +7,16 @@ import Button from '@/components/ui/Button';
 import { useRippleEffect } from '@/hooks/useRippleEffect';
 import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
-// Variants simplifiés pour les animations Framer Motion
+// Variants pour les animations sans effet d'apparition
 const containerVariants = {
-  hidden: { opacity: 0 },
   visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.5
-    }
+    opacity: 1
   }
 };
 
 const itemVariants = {
-  hidden: { opacity: 0 },
   visible: {
-    opacity: 1,
-    transition: {
-      duration: 0.3
-    }
+    opacity: 1
   }
 };
 
@@ -54,7 +46,7 @@ const Hero = () => {
   // Effet de parallax supprimé pour améliorer les performances
   
   return (
-    <div ref={heroRef} className="relative bg-gradient-to-b from-white to-blue-50 pt-8 pb-12 overflow-hidden">
+    <div ref={heroRef} className="relative bg-blue-50 pt-8 pb-12 overflow-hidden">
       {/* Éléments décoratifs simplifiés pour améliorer les performances */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Vagues décoratives simplifiées */}
@@ -70,8 +62,8 @@ const Hero = () => {
           {/* Partie gauche - Texte principal */}
           <motion.div 
             className="lg:col-span-7 xl:col-span-6 lg:mt-0 flex flex-col justify-center"
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
+            initial="visible"
+            animate="visible"
             variants={containerVariants}
           >
             {/* Badges de services */}
@@ -159,9 +151,8 @@ const Hero = () => {
               {/* Fond décoratif */}
               <motion.div 
                 className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl overflow-hidden shadow-xl"
-                initial={{ opacity: 0 }}
+                initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
               >
                 {/* Motif de grille */}
                 <div className="absolute inset-0 opacity-15">

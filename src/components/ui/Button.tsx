@@ -99,7 +99,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         }}
         {...props}
         // On supprime onClick car on l'a déjà géré ci-dessus
-        onClick={undefined}
+        // onClick={undefined}
       >
         {buttonContent}
       </button>

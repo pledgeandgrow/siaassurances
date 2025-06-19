@@ -13,19 +13,14 @@ interface DevisStepOneProps {
 const DevisStepOne: React.FC<DevisStepOneProps> = ({ formData, errors, handleChange }) => {
   const [focused, setFocused] = useState<string | null>(null);
   
-  // Animation variants pour les éléments qui apparaissent
+  // Animation variants sans effet d'apparition
   const containerVariants = {
-    hidden: { opacity: 0 },
     visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
+      opacity: 1
     }
   };
   
   const itemVariants = {
-    hidden: { opacity: 0, y: 10 },
     visible: { 
       opacity: 1, 
       y: 0, 

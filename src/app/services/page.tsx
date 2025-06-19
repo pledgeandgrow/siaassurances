@@ -13,7 +13,7 @@ export default function ServicesPage() {
   
   return (
     <div className="min-h-screen bg-gray-50">
-      <ServicesHero />
+      {/* <ServicesHero /> */}
       <ServicesOverview />
       <ServicesDetail />
       <ServicesFAQ />
