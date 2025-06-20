@@ -2,14 +2,18 @@
 
 import React from 'react';
 import { DevisFormData, ErrorState } from './types';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 interface DevisStepFourProps {
   formData: DevisFormData;
   errors: ErrorState;
   handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void;
+  captchaToken?: string | null;
+  onCaptchaChange?: (token: string | null) => void;
+  recaptchaRef?: React.RefObject<ReCAPTCHA | null>;
 }
 
-const DevisStepFour: React.FC<DevisStepFourProps> = ({ formData, errors, handleChange }) => {
+const DevisStepFour: React.FC<DevisStepFourProps> = ({ formData, errors, handleChange, onCaptchaChange }) => {
   return (
     <div className="space-y-8 bg-white p-6 sm:p-8 rounded-xl shadow-sm">
       <div className="flex items-center space-x-4 mb-6">
@@ -176,6 +180,31 @@ const DevisStepFour: React.FC<DevisStepFourProps> = ({ formData, errors, handleC
           </label>
         </div>
         {errors.consent && <p className="mt-2 text-sm text-red-600 flex items-center"><svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd"></path></svg>{errors.consent}</p>}
+      </div>
+      
+      {/* reCAPTCHA */}
+      <div className="pt-6">
+        <div className="flex items-start space-x-3 mb-3">
+          <div className="h-7 w-7 rounded-full bg-blue-100 flex items-center justify-center mt-0.5">
+            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <div>
+            <h4 className="font-semibold text-blue-800 mb-1">Vérification de sécurité</h4>
+            <p className="text-sm text-slate-700">Veuillez confirmer que vous n&apos;êtes pas un robot <span className="text-red-500 font-bold">*</span></p>
+          </div>
+        </div>
+        
+        <div className="pl-10">
+          {/* Utilisation conditionnelle de la référence pour éviter les erreurs de type */}
+          <ReCAPTCHA
+            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // Clé de test Google, à remplacer par votre clé réelle
+            onChange={onCaptchaChange}
+            className="mt-2"
+          />
+          {errors.recaptcha && <p className="mt-2 text-sm text-red-600 flex items-center"><svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9a1 1 0 00-1-1z" clipRule="evenodd"></path></svg>{errors.recaptcha}</p>}
+        </div>
       </div>
     </div>
   );

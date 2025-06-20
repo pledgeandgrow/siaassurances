@@ -371,7 +371,7 @@ const Services = () => {
                 createRipple(e);
                 window.location.href = '/contact';
               }} 
-              className="flex items-center justify-center px-6 py-3 rounded-lg text-base font-medium transition-all duration-300 transform hover:shadow-xl hover:shadow-blue-100/50 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md bg-blue-700 hover:bg-blue-800 text-white focus:ring-blue-500"
+              className="flex items-center justify-center px-6 py-3 rounded-lg text-base font-medium transition-all duration-300 transform hover:shadow-xl hover:shadow-blue-100/50 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md bg-blue-700 hover:bg-blue-800 text-white focus:ring-blue-500 cursor-pointer"
               whileHover={{ scale: 1.05 }}
             >
               {/* Effet de particules supprimé pour améliorer les performances */}

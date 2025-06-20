@@ -78,7 +78,9 @@ const AboutHistory = () => {
               className="object-cover w-full h-full rounded-2xl transition-transform duration-700 group-hover:scale-105"
               style={{ objectPosition: '50% 10%' }}
               fill
-              priority
+              priority={false}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              quality={85}
             />
             
             {/* Dégradé en bas de l'image */}

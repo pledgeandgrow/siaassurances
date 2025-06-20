@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import Button from '@/components/ui/Button';
 import { useRippleEffect } from '@/hooks/useRippleEffect';
 import Link from 'next/link';
@@ -38,6 +39,8 @@ const DevisForm = () => {
   // État pour le statut de soumission
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   // Hook pour l'effet ripple sur les boutons
   const { createRipple } = useRippleEffect();
@@ -118,6 +121,11 @@ const DevisForm = () => {
       if (!formData.startDate) newErrors.startDate = 'La date est requise';
       if (!formData.contactPreference) newErrors.contactPreference = 'Veuillez sélectionner une préférence de contact';
       if (!formData.consent) newErrors.consent = 'Vous devez accepter la politique de confidentialité';
+      
+      // Validation du reCAPTCHA à l'étape finale
+      if (!captchaToken) {
+        newErrors.recaptcha = 'Veuillez confirmer que vous n\'êtes pas un robot';
+      }
     }
     
     // Mise à jour des erreurs pour toutes les étapes
@@ -133,28 +141,59 @@ const DevisForm = () => {
     }
   };
 
-  // Gestion de la soumission du formulaire
-  const handleSubmit = async () => {
-    // Validation avant envoi
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
+  // Gestion du changement de reCAPTCHA
+  const handleCaptchaChange = (token: string | null) => {
+    setCaptchaToken(token);
+    if (errors.recaptcha) {
+      setErrors({
+        ...errors,
+        recaptcha: ''
+      });
     }
+  };
+
+  // Gestion de la soumission du formulaire
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    if (!validateForm()) return;
+    
     setIsSubmitting(true);
     setSubmitStatus('idle');
     
     try {
-      // Simulation d'un appel API (à remplacer par un vrai appel API)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Ajout d'un champ honeypot invisible pour la protection anti-spam
+      const dataToSend = {
+        ...formData,
+        website: '', // Champ honeypot vide (sera rempli par les bots)
+        recaptchaToken: captchaToken // Ajout du token reCAPTCHA
+      };
       
-      console.log('Données du formulaire soumises:', formData);
+      // Appel à l'API route Next.js
+      const response = await fetch('/api/devis', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      });
       
-      // Réinitialiser le formulaire après soumission réussie
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Une erreur est survenue');
+      }
+      
+      // Réinitialiser le captcha
+      setCaptchaToken(null);
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
+      
       setSubmitStatus('success');
     } catch (error) {
-      console.error('Erreur lors de la soumission:', error);
       setSubmitStatus('error');
+      console.error('Erreur lors de l\'envoi de la demande de devis:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -178,7 +217,7 @@ const DevisForm = () => {
       </div>
       
       {/* Formulaire */}
-      <form className="space-y-8">
+      <form onSubmit={handleSubmit} className="space-y-8">
         {/* Contenu de l'étape actuelle */}
         <div className={currentStep === 1 ? 'block' : 'hidden'}>
           <DevisStepOne formData={formData} errors={errors} handleChange={handleChange} />
@@ -193,7 +232,27 @@ const DevisForm = () => {
         </div>
         
         <div className={currentStep === 4 ? 'block' : 'hidden'}>
-          <DevisStepFour formData={formData} errors={errors} handleChange={handleChange} />
+          <DevisStepFour 
+            formData={formData} 
+            errors={errors} 
+            handleChange={handleChange} 
+            captchaToken={captchaToken}
+            onCaptchaChange={handleCaptchaChange}
+            recaptchaRef={recaptchaRef}
+          />
+        </div>
+        
+        {/* Champ honeypot invisible pour protection anti-spam */}
+        <div className="hidden" aria-hidden="true">
+          <label htmlFor="website">Ne pas remplir ce champ (anti-spam)</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
         </div>
 
         {/* Message de confirmation après soumission */}
@@ -272,12 +331,7 @@ const DevisForm = () => {
                 </Button>
               ) : (
                 <Button
-                  type="button"
-                  onClick={(e) => {
-                    createRipple(e as React.MouseEvent<HTMLButtonElement>);
-                    // Valider le formulaire dans le gestionnaire d'événement plutôt que dans le rendu
-                    handleSubmit();
-                  }}
+                  type="submit"
                   disabled={Object.keys(errors).length > 0 || isSubmitting}
                   variant="cta"
                   size="md"

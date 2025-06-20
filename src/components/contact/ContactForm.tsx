@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -10,12 +11,15 @@ const ContactForm = () => {
     phone: '',
     subject: '',
     message: '',
-    consent: false
+    consent: false,
+    website: '' // Champ honeypot pour la protection anti-spam
   });
   
   const [errors, setErrors] = useState<{[key: string]: string}>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   // Gestion des changements de champs
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -58,8 +62,24 @@ const ContactForm = () => {
     if (!formData.message.trim()) newErrors.message = 'Veuillez écrire un message';
     if (!formData.consent) newErrors.consent = 'Veuillez accepter la politique de confidentialité';
     
+    // Validation du reCAPTCHA
+    if (!captchaToken) {
+      newErrors.recaptcha = 'Veuillez confirmer que vous n\'êtes pas un robot';
+    }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  // Gestion du changement de reCAPTCHA
+  const handleCaptchaChange = (token: string | null) => {
+    setCaptchaToken(token);
+    if (errors.recaptcha) {
+      setErrors({
+        ...errors,
+        recaptcha: ''
+      });
+    }
   };
 
   // Soumission du formulaire
@@ -72,8 +92,27 @@ const ContactForm = () => {
     setSubmitStatus('idle');
     
     try {
-      // Simuler l'envoi vers un backend (à remplacer par un vrai appel API)
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Ajout d'un champ honeypot invisible pour la protection anti-spam
+      const dataToSend = {
+        ...formData,
+        website: '', // Champ honeypot vide (sera rempli par les bots)
+        recaptchaToken: captchaToken // Ajout du token reCAPTCHA
+      };
+      
+      // Appel à l'API route Next.js
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend),
+      });
+      
+      const result = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Une erreur est survenue');
+      }
       
       // Réinitialiser le formulaire après succès
       setFormData({
@@ -83,8 +122,14 @@ const ContactForm = () => {
         phone: '',
         subject: '',
         message: '',
-        consent: false
+        consent: false,
+        website: ''
       });
+      setCaptchaToken(null);
+      // Réinitialiser le captcha
+      if (recaptchaRef.current) {
+        recaptchaRef.current.reset();
+      }
       setSubmitStatus('success');
     } catch (error) {
       setSubmitStatus('error');
@@ -243,6 +288,31 @@ const ContactForm = () => {
             </label>
           </div>
           {errors.consent && <p className="mt-1 text-sm text-red-600 font-medium">{errors.consent}</p>}
+        </div>
+        
+        {/* Champ honeypot invisible pour protection anti-spam */}
+        <div className="hidden" aria-hidden="true">
+          <label htmlFor="website">Ne pas remplir ce champ (anti-spam)</label>
+          <input
+            type="text"
+            id="website"
+            name="website"
+            value={formData.website}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
+        
+        {/* reCAPTCHA */}
+        <div className="mb-6">
+          <ReCAPTCHA
+            ref={recaptchaRef}
+            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI" // Clé de test Google, à remplacer par votre clé réelle
+            onChange={handleCaptchaChange}
+            className="mt-2"
+          />
+          {errors.recaptcha && <p className="mt-1 text-sm text-red-600 font-medium">{errors.recaptcha}</p>}
         </div>
         
         {/* Bouton d'envoi */}

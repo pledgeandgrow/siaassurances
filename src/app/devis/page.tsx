@@ -1,6 +1,11 @@
 import React from 'react';
 import DevisHero from '@/components/devis/DevisHero';
 import DevisForm from '@/components/devis/DevisForm';
+import { devisMetadata } from '../metadata-utils';
+import type { Metadata } from 'next';
+
+// Métadonnées optimisées pour la page de devis
+export const metadata: Metadata = devisMetadata;
 
 export default function DevisPage() {
   return (

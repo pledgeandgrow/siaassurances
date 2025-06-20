@@ -1,9 +1,12 @@
-"use client";
-
 import React from 'react';
 import ContactHero from '@/components/contact/ContactHero';
 import ContactInfo from '@/components/contact/ContactInfo';
 import ContactForm from '@/components/contact/ContactForm';
+import { contactMetadata } from '../metadata-utils';
+import type { Metadata } from 'next';
+
+// Métadonnées optimisées pour la page contact
+export const metadata: Metadata = contactMetadata;
 
 export default function ContactPage() {
   return (

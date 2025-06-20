@@ -101,7 +101,7 @@ const Hero = () => {
               variants={itemVariants}
             >
               <button 
-                className={`${buttonBaseStyle} bg-blue-700 hover:bg-blue-800 text-white focus:ring-blue-500`}
+                className={`${buttonBaseStyle} bg-blue-700 hover:bg-blue-800 text-white focus:ring-blue-500 cursor-pointer`}
                 onClick={(e) => createRipple(e)}
               >
                 <span className="mr-2">
@@ -111,7 +111,7 @@ const Hero = () => {
                 </span>
                 Demander un devis
               </button>
-              <Link href="/contact" className={`${buttonBaseStyle} bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-blue-500`}>
+              <Link href="/contact" className={`${buttonBaseStyle} bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-blue-500 cursor-pointer`}>
                 Nous contacter
               </Link>
             </motion.div>
@@ -150,20 +150,10 @@ const Hero = () => {
                 initial={{ opacity: 1 }}
                 animate={{ opacity: 1 }}
               >
-                {/* Motif de grille */}
-                <div className="absolute inset-0 opacity-15">
-                  <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none">
-                    <pattern id="grid" width="12" height="12" patternUnits="userSpaceOnUse">
-                      <rect width="1" height="1" fill="#FFFFFF"></rect>
-                    </pattern>
-                    <rect width="100" height="100" fill="url(#grid)"></rect>
-                  </svg>
-                </div>
-                
                 {/* Contenu de la partie droite */}
-                <div className="relative flex flex-col items-center justify-center p-8 z-10 py-12 lg:py-16">
+                <div className="relative flex flex-col items-center justify-center p-6 z-10 py-8 lg:py-12">
                   {/* Image symbolique de construction */}
-                  <div className="mb-10">
+                  <div className="mb-6">
                     <div className="relative w-44 h-44 md:w-56 md:h-56 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm">
                       <div className="absolute inset-1.5 rounded-full bg-white/5 backdrop-blur-sm border border-white/20"></div>
                       <div className="relative z-10 text-white text-center">
@@ -183,7 +173,7 @@ const Hero = () => {
                   </div>
                   
                   {/* Indicateurs de confiance - Remis à l&apos;intérieur de la carte bleue */}
-                  <div className="mt-8 mb-6 w-full grid grid-cols-2 gap-4 max-w-md mx-auto">
+                  <div className="mt-6 mb-4 w-full grid grid-cols-2 gap-4 max-w-md mx-auto">
                     <div className="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center shadow-lg">
                       <div className="text-white text-xl md:text-2xl font-bold">1000+</div>
                       <div className="text-blue-100 text-sm">Clients satisfaits</div>

@@ -52,7 +52,7 @@ const FAQItem: React.FC<{ item: FAQItem; isOpen: boolean; onClick: () => void; i
       whileHover={{ scale: isOpen ? 1 : 1.01 }}
     >
       <button
-        className={`w-full text-left p-5 flex justify-between items-center focus:outline-none ${
+        className={`w-full cursor-pointer text-left p-5 flex justify-between items-center focus:outline-none ${
           isOpen ? 'bg-blue-50' : 'hover:bg-gray-50'
         }`}
         onClick={onClick}

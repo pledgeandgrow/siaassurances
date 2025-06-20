@@ -271,7 +271,7 @@ const ServiceTab: React.FC<ServiceTabProps> = ({ name, icon, isActive, onClick }
   return (
     <motion.button
       onClick={onClick}
-      className={`flex items-center gap-3 px-4 py-3 rounded-lg w-full text-left transition-all ${isActive 
+      className={`flex items-center cursor-pointer gap-3 px-4 py-3 rounded-lg w-full text-left transition-all ${isActive 
         ? 'bg-blue-50 text-blue-800 shadow-sm'
         : 'bg-white text-gray-700 hover:bg-gray-50'}`}
       variants={tabVariants}
