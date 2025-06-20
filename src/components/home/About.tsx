@@ -35,11 +35,13 @@ const About = () => {
           <div className="relative h-96 md:h-[28rem] lg:h-[32rem] overflow-hidden rounded-2xl shadow-xl group">
             {/* Image avec effet au survol */}
             <div className="relative w-full h-full overflow-hidden">
-              <img 
+              <Image 
                 src="/drissa.jpg" 
                 alt="SIA Assurances" 
                 style={{ objectPosition: '50% 10%' }}
                 className="object-cover w-full h-full rounded-2xl transition-transform duration-700 group-hover:scale-105"
+                fill
+                priority
               />
               
               {/* Dégradé en bas de l'image */}

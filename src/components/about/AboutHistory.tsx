@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const AboutHistory = () => {
   return (
@@ -72,11 +72,13 @@ const AboutHistory = () => {
         <div className="relative h-96 md:h-[28rem] lg:h-[32rem] overflow-hidden rounded-2xl shadow-xl group">
           {/* Image de Drissa avec effet au survol */}
           <div className="relative w-full h-full overflow-hidden">
-            <img 
+            <Image 
               src="/drissa.jpg" 
               alt="Drissa SIA Assurances" 
               className="object-cover w-full h-full rounded-2xl transition-transform duration-700 group-hover:scale-105"
               style={{ objectPosition: '50% 10%' }}
+              fill
+              priority
             />
             
             {/* Dégradé en bas de l'image */}

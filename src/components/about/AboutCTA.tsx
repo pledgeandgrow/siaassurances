@@ -9,18 +9,6 @@ const AboutCTA = () => {
   const { createRipple } = useRippleEffect();
   
   // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        delay: 0.3,
-        when: "beforeChildren" as const,
-        staggerChildren: 0.15,
-      }
-    }
-  };
-  
   const itemVariants = {
     hidden: { opacity: 0, y: 15 },
     visible: {

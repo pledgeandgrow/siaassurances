@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 import { FaCalendarAlt, FaEuroSign, FaUsers, FaHandshake } from 'react-icons/fa';
 
 const AboutKeyFigures = () => {

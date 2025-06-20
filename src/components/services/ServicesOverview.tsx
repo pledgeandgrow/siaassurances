@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { FaShieldAlt, FaBuilding, FaTools, FaHandshake, FaHardHat, FaUserTie } from 'react-icons/fa';
 
 // Types pour les services

@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 
 const AboutValues = () => {
   return (
@@ -69,7 +68,7 @@ const AboutValues = () => {
                 </svg>
               )
             }
-          ].map((value, index) => (
+          ].map((value) => (
             <div key={value.id} className="group">
               <div className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 h-full border border-blue-50 overflow-hidden">
                 {/* En-tête avec icône et titre */}

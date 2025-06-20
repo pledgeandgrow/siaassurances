@@ -1,5 +1,4 @@
 import React from 'react';
-import AboutHero from '@/components/about/AboutHero';
 import AboutHistory from '@/components/about/AboutHistory';
 import AboutKeyFigures from '@/components/about/AboutKeyFigures';
 import AboutValues from '@/components/about/AboutValues';
