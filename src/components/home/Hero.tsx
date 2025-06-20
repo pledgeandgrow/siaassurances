@@ -19,7 +19,7 @@ const itemVariants = {
 };
 
 // Style global pour les boutons d'action
-const buttonBaseStyle = "flex items-center justify-center px-6 py-3 rounded-lg text-base font-medium transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md";
+const buttonBaseStyle = "flex items-center justify-center px-6 py-3 rounded-lg text-base font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-blue-100/50 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md";
 
 // Composant pour les badges de services
 interface ServiceBadgeProps {

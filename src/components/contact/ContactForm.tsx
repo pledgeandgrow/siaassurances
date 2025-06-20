@@ -95,8 +95,8 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg">
-      <h2 className="text-2xl font-bold text-gray-900 mb-6">Envoyez-nous un message</h2>
+    <div className="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
+      <h2 className="text-2xl font-bold text-blue-900 mb-6">Envoyez-nous un message</h2>
       
       {/* Message de succès */}
       {submitStatus === 'success' && (
@@ -126,7 +126,7 @@ const ContactForm = () => {
         {/* Rangée nom et prénom */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           <div>
-            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="firstName" className="block text-sm font-semibold text-gray-800 mb-1">
               Prénom *
             </label>
             <input
@@ -135,13 +135,13 @@ const ContactForm = () => {
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500`}
+              className={`w-full px-4 py-2 border ${errors.firstName ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900`}
             />
-            {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>}
+            {errors.firstName && <p className="mt-1 text-sm text-red-600 font-medium">{errors.firstName}</p>}
           </div>
           
           <div>
-            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="lastName" className="block text-sm font-semibold text-gray-800 mb-1">
               Nom *
             </label>
             <input
@@ -150,16 +150,16 @@ const ContactForm = () => {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500`}
+              className={`w-full px-4 py-2 border ${errors.lastName ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900`}
             />
-            {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>}
+            {errors.lastName && <p className="mt-1 text-sm text-red-600 font-medium">{errors.lastName}</p>}
           </div>
         </div>
         
         {/* Rangée email et téléphone */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="email" className="block text-sm font-semibold text-gray-800 mb-1">
               Email *
             </label>
             <input
@@ -168,13 +168,13 @@ const ContactForm = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500`}
+              className={`w-full px-4 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900`}
             />
-            {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+            {errors.email && <p className="mt-1 text-sm text-red-600 font-medium">{errors.email}</p>}
           </div>
           
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="phone" className="block text-sm font-semibold text-gray-800 mb-1">
               Téléphone *
             </label>
             <input
@@ -183,15 +183,15 @@ const ContactForm = () => {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className={`w-full px-4 py-2 border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500`}
+              className={`w-full px-4 py-2 border ${errors.phone ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900`}
             />
-            {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
+            {errors.phone && <p className="mt-1 text-sm text-red-600 font-medium">{errors.phone}</p>}
           </div>
         </div>
         
         {/* Sujet */}
         <div className="mb-6">
-          <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="subject" className="block text-sm font-semibold text-gray-800 mb-1">
             Sujet *
           </label>
           <select
@@ -199,21 +199,21 @@ const ContactForm = () => {
             name="subject"
             value={formData.subject}
             onChange={handleChange}
-            className={`w-full px-4 py-2 border ${errors.subject ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500`}
+            className={`w-full px-4 py-2 border ${errors.subject ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900 font-medium`}
           >
-            <option value="">Sélectionner un sujet</option>
-            <option value="devis">Demande de devis</option>
-            <option value="information">Demande d&apos;information</option>
-            <option value="sinistre">Déclaration de sinistre</option>
-            <option value="reclamation">Réclamation</option>
-            <option value="autre">Autre</option>
+            <option value="" className="text-gray-900">Sélectionner un sujet</option>
+            <option value="devis" className="text-gray-900">Demande de devis</option>
+            <option value="information" className="text-gray-900">Demande d&apos;information</option>
+            <option value="sinistre" className="text-gray-900">Déclaration de sinistre</option>
+            <option value="reclamation" className="text-gray-900">Réclamation</option>
+            <option value="autre" className="text-gray-900">Autre</option>
           </select>
-          {errors.subject && <p className="mt-1 text-sm text-red-600">{errors.subject}</p>}
+          {errors.subject && <p className="mt-1 text-sm text-red-600 font-medium">{errors.subject}</p>}
         </div>
         
         {/* Message */}
         <div className="mb-6">
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="message" className="block text-sm font-semibold text-gray-800 mb-1">
             Message *
           </label>
           <textarea
@@ -222,9 +222,9 @@ const ContactForm = () => {
             rows={4}
             value={formData.message}
             onChange={handleChange}
-            className={`w-full px-4 py-2 border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500`}
+            className={`w-full px-4 py-2 border ${errors.message ? 'border-red-500' : 'border-gray-300'} rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-gray-900`}
           ></textarea>
-          {errors.message && <p className="mt-1 text-sm text-red-600">{errors.message}</p>}
+          {errors.message && <p className="mt-1 text-sm text-red-600 font-medium">{errors.message}</p>}
         </div>
         
         {/* Consentement RGPD */}
@@ -236,13 +236,13 @@ const ContactForm = () => {
               name="consent"
               checked={formData.consent}
               onChange={handleChange}
-              className={`h-4 w-4 mt-1 text-blue-600 focus:ring-blue-500 ${errors.consent ? 'border-red-500' : 'border-gray-300'}`}
+              className={`h-5 w-5 mt-1 text-blue-600 focus:ring-blue-500 ${errors.consent ? 'border-red-500' : 'border-gray-300'}`}
             />
-            <label htmlFor="consent" className="ml-2 block text-sm text-gray-700">
-              J&apos;accepte que mes données soient traitées conformément à la <a href="/privacy" className="text-blue-800 hover:underline">politique de confidentialité</a> de SIA Assurances *
+            <label htmlFor="consent" className="ml-2 block text-sm text-gray-800">
+              J&apos;accepte que mes données soient traitées conformément à la <a href="/privacy" className="text-blue-700 font-medium hover:underline">politique de confidentialité</a> de SIA Assurances *
             </label>
           </div>
-          {errors.consent && <p className="mt-1 text-sm text-red-600">{errors.consent}</p>}
+          {errors.consent && <p className="mt-1 text-sm text-red-600 font-medium">{errors.consent}</p>}
         </div>
         
         {/* Bouton d'envoi */}

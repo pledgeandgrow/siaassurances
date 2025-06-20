@@ -64,10 +64,10 @@ const AboutCTA = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           className="relative bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-2xl p-10 text-center shadow-xl"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={containerVariants}
+          // initial="hidden"
+          // whileInView="visible"
+          // viewport={{ once: true, amount: 0.3 }}
+          // variants={containerVariants}
         >
           {/* Cercles décoratifs avec glow */}
           <div className="absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 bg-gradient-to-br from-blue-300/20 to-blue-400/10 rounded-full blur-3xl opacity-60 pointer-events-none" />

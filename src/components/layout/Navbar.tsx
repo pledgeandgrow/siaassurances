@@ -70,7 +70,7 @@ const Navbar = () => {
                   height={40}
                   className="h-10 w-auto max-w-[160px]"
                 />
-                <span className="ml-2 text-lg font-semibold text-blue-800">SIA Assurances</span>
+                <span className="ml-2 text-lg font-semibold text-blue-700">SIA Assurances</span>
               </div>
             </Link>
           </div>

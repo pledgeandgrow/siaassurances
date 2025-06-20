@@ -8,7 +8,7 @@ import AboutCTA from '@/components/about/AboutCTA';
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <AboutHero />
+      {/* <AboutHero /> */}
       <AboutHistory />
       <AboutKeyFigures />
       <AboutValues />

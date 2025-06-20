@@ -321,7 +321,7 @@ const Testimonials = () => {
           <motion.div variants={itemVariants} whileHover={{ scale: 1.05 }}>
             <span className="inline-block px-5 py-2 mb-5 text-sm font-medium text-blue-800 bg-gradient-to-r from-blue-50 to-blue-100 rounded-full shadow-sm border border-blue-100 hover:shadow-md hover:border-blue-200 transition-all duration-300 relative">
               <div className="absolute inset-0 bg-blue-400 opacity-0 rounded-full blur-md group-hover:opacity-20 transition-opacity duration-300"></div>
-              <span className="relative inline-flex items-center">
+              <span className="relative inline-flex items-center text-sm font-semibold text-blue-700">
                 <motion.svg className="w-4 h-4 mr-1 text-blue-600" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
                   animate={{ rotate: [0, 15] }}
                   transition={{

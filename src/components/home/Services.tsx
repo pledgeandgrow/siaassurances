@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useRippleEffect } from '@/hooks/useRippleEffect';
 
 type ServiceCardProps = {
   title: string;
@@ -126,6 +127,9 @@ const Services = () => {
     visible: { opacity: 1, y: 0 }
   };
   
+  // Hook pour l'effet ripple sur les boutons
+  const { createRipple } = useRippleEffect();
+  
   return (
     <section className="py-20 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden" id="services">
       {/* Motif de grille subtil sur tout l'arrière-plan */}
@@ -206,17 +210,23 @@ const Services = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring" as const, stiffness: 300, damping: 10 }}
           >
-            <span className="inline-block px-5 py-2 mb-5 text-sm font-medium text-blue-800 bg-gradient-to-r from-blue-50 to-blue-100 rounded-full shadow-sm border border-blue-100 hover:shadow-md hover:border-blue-200 transition-all duration-300">
+            <span className="inline-flex items-center px-5 py-2 mb-5 text-sm font-semibold text-blue-800 bg-gradient-to-r from-blue-50 to-blue-100 rounded-full shadow-sm border border-blue-100 hover:shadow-md hover:border-blue-200 transition-all duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1.5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+              </svg>
               Une offre complète
             </span>
           </motion.div>
           
           <motion.h2 
-            className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-500 sm:text-5xl mb-3"
+            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 flex items-center justify-center gap-3"
             variants={itemVariants}
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring" as const, stiffness: 200, damping: 10 }}
           >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-blue-600">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+            </svg>
             Nos Services
           </motion.h2>
           
@@ -353,38 +363,24 @@ const Services = () => {
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring" as const, stiffness: 400, damping: 10 }}
           >
-            {/* Effet de glow en arrière-plan du bouton uniquement au survol */}
-            <motion.div 
-              className="absolute -inset-1 rounded-lg bg-gradient-to-r from-blue-500 to-blue-700 opacity-0 group-hover:opacity-40 blur-sm transition-opacity duration-300"
-            ></motion.div>
+            {/* Effet de glow supprimé pour éviter les conflits d'animation */}
             
             {/* Bouton CTA principal */}
-            <motion.a 
-              href="/contact" 
-              className="relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white font-medium rounded-lg shadow-lg shadow-blue-500/20 overflow-hidden hover:shadow-blue-500/40 transition-all duration-300"
-              whileHover={{ boxShadow: "0 10px 30px -10px rgba(59, 130, 246, 0.5)" }}
+            <motion.button 
+              onClick={(e) => {
+                createRipple(e);
+                window.location.href = '/contact';
+              }} 
+              className="flex items-center justify-center px-6 py-3 rounded-lg text-base font-medium transition-all duration-300 transform hover:shadow-xl hover:shadow-blue-100/50 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-md bg-blue-700 hover:bg-blue-800 text-white focus:ring-blue-500"
+              whileHover={{ scale: 1.05 }}
             >
               {/* Effet de particules supprimé pour améliorer les performances */}
               
-              <span className="mr-3">Demander un devis personnalisé</span>
-              <motion.svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                className="h-5 w-5" 
-                fill="none" 
-                viewBox="0 0 24 24" 
-                stroke="currentColor"
-                animate={{ x: [0, 4] }}
-                transition={{
-                  repeat: Infinity,
-                  repeatType: "reverse" as const,
-                  duration: 1.5,
-                  ease: "easeInOut" as const,
-                  type: "tween" as const
-                }}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </motion.svg>
-            </motion.a>
+              <span className="mr-2">Demander un devis personnalisé</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </motion.button>
           </motion.div>
         </motion.div>
       </div>
