@@ -7,6 +7,7 @@ import Footer from "../components/layout/Footer";
 import ClientPerformanceWrapper from "../components/common/ClientPerformanceWrapper";
 import ClientAnalyticsScript from "../components/common/ClientAnalyticsScript";
 import ScrollToTop from "../components/common/ScrollToTop";
+import ClientChatBot from "../components/common/ClientChatBot";
 
 // Optimisation du chargement des polices
 const geistSans = Geist({
@@ -101,26 +102,14 @@ export const metadata: Metadata = {
   
   // Icônes
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
     other: [
       {
         rel: "icon",
         type: "image/png",
-        sizes: "32x32",
-        url: "/favicon-32x32.png",
-      },
-      {
-        rel: "icon",
-        type: "image/png",
-        sizes: "16x16",
-        url: "/favicon-16x16.png",
-      },
-      {
-        rel: "mask-icon",
-        url: "/safari-pinned-tab.svg",
-        color: "#35789B",
+        url: "/logo.png",
       },
     ],
   },
@@ -141,6 +130,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         
+        {/* Favicon direct */}
+        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="shortcut icon" href="/logo.png" type="image/png" />
+        
         {/* Préchargement des images critiques */}
         <link rel="preload" as="image" href="/logo.svg" />
       </head>
@@ -158,6 +151,9 @@ export default function RootLayout({
         
         {/* Bouton pour remonter en haut de la page */}
         <ScrollToTop />
+        
+        {/* Chatbot pour les questions fréquentes */}
+        <ClientChatBot />
         
         {/* Script d'analyse de performance - à charger en différé */}
         <ClientAnalyticsScript />
